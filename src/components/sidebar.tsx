@@ -1,9 +1,9 @@
-import { File, Menu, X } from "lucide-react"
+import { File, X } from "lucide-react"
 import Link from "next/link"
 
 export default function Sidebar() {
   return (
-    <aside className="flex h-screen w-12 flex-col items-center gap-4 bg-zinc-800 py-4">
+    <aside className="flex h-[90vh] w-12 flex-col items-center gap-4 bg-white py-4">
       <Link
         href="#"
         className="text-sm font-medium text-zinc-400 hover:text-zinc-100"
@@ -44,13 +44,6 @@ export default function Sidebar() {
           <span className="sr-only">Files</span>
         </Link>
       </nav>
-      <button
-        type="button"
-        className="rounded-md p-1.5 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-100"
-      >
-        <Menu className="h-5 w-5" />
-        <span className="sr-only">Menu</span>
-      </button>
     </aside>
   )
 }
