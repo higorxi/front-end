@@ -1,6 +1,6 @@
 'use client'
 
-import { Bell, Menu, Grid2X2 } from 'lucide-react';
+import { Bell, Menu, LayoutGrid } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -20,7 +20,7 @@ export function Header() {
       <div className="flex h-16 items-center px-4">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-            <Menu className="h-5 w-5" />
+            <Menu className="h-6 w-6" />
           </Button>
 
           <div className="flex items-center gap-2">
@@ -31,7 +31,7 @@ export function Header() {
         <Separator orientation="vertical" className="mx-4 h-8" />
 
         <Button variant="ghost" className="gap-2">
-          <Grid2X2 className="h-4 w-4" />
+          <LayoutGrid className="h-4 w-4" />
           Soluções
         </Button>
 
@@ -45,7 +45,7 @@ export function Header() {
             <DropdownMenuTrigger asChild className="h-12 w-60 p-2 gap-2">
               <Button variant="outline">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
+                  <AvatarImage src="https://github.com/shadcn.png" alt="User" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col items-start text-sm font-bold">

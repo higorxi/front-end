@@ -3,7 +3,7 @@ import { useSidebar } from "@/context/sidebar-context";
 import { FileText, FileType, LayoutGrid, List } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { Avatar } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export default function Sidebar() {
   const { isExpanded } = useSidebar();
@@ -29,11 +29,14 @@ export default function Sidebar() {
         } mb-4`}
       >
         <div
-          className={`rounded-full bg-gray-700 p-2 ${
+          className={`rounded-full bg-gray-700 p-2 mb-4 ${
             isExpanded ? "h-12 w-12" : "h-8 w-8"
           } flex items-center justify-center`}
         >
-          <Avatar className={`${isExpanded ? "h-8 w-8" : "h-5 w-5"}`} />
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+            <AvatarFallback>U</AvatarFallback>
+          </Avatar>
         </div>
       </div>
 
