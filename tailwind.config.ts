@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from 'tailwindcss/colors';
 
 export default {
     darkMode: ["class"],
@@ -10,6 +11,7 @@ export default {
   theme: {
   	extend: {
   		colors: {
+			...colors,
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -49,7 +51,10 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			grayIcons: '#3A424E',
+			greenLight: '#CAFFD6',
+			greenPrimary: '#05C151'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

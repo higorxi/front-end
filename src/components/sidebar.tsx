@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import { useSidebar } from "@/context/sidebar-context";
-import { File, Grid, Menu, Paperclip } from "lucide-react";
+import { FileText, FileType, LayoutGrid, List } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Avatar } from "./ui/avatar";
@@ -10,17 +10,18 @@ export default function Sidebar() {
   const [activeItem, setActiveItem] = useState<number | null>(null);
 
   const navItems = [
-    { id: 1, label: "Soluções", icon: Grid, href: "#" },
-    { id: 2, label: "Documentos", icon: File, href: "#" },
-    { id: 3, label: "Papel T", icon: Paperclip, href: "#" },
-    { id: 4, label: "Menu", icon: Menu, href: "#" },
+    { id: 1, label: "Soluções", icon: LayoutGrid, href: "#" },
+    { id: 2, label: "Documentos", icon: FileText, href: "#" },
+    { id: 3, label: "Papel T", icon: FileType, href: "#" },
+    { id: 4, label: "Menu", icon: List, href: "#" },
   ];
 
   return (
     <aside
-      className={`flex h-[90vh] ${
+      className={`flex ${
         isExpanded ? "w-48" : "w-12"
-      } flex-col bg-white items-center text-white py-4 transition-all duration-300`}
+      } flex-col bg-white items-center text-white py-4 transition-all duration-300 border-r border-gray-200`}
+      style={{ height: "calc(100vh - 4rem)" }}
     >
       <div
         className={`flex items-center ${
@@ -32,7 +33,7 @@ export default function Sidebar() {
             isExpanded ? "h-12 w-12" : "h-8 w-8"
           } flex items-center justify-center`}
         >
-          <Avatar  className={`${isExpanded ? "h-8 w-8" : "h-5 w-5"}`}/>
+          <Avatar className={`${isExpanded ? "h-8 w-8" : "h-5 w-5"}`} />
         </div>
       </div>
 
@@ -48,15 +49,13 @@ export default function Sidebar() {
             onClick={() => setActiveItem(item.id)}
             className={`flex items-center gap-2 w-full px-2 py-2 rounded-md ${
               activeItem === item.id
-                ? "bg-emerald-500 text-white"
-                : "text-gray-400 hover:bg-gray-700 hover:text-white"
+                ? "bg-greenLight text-grayIcons"
+                : "text-grayIcons hover:bg-greenLight hover:text-grayIcons"
             }`}
           >
             <item.icon className="h-5 w-5" />
             {isExpanded && (
-              <span className="text-sm font-medium truncate">
-                {item.label}
-              </span>
+              <span className="text-sm font-medium truncate">{item.label}</span>
             )}
           </Link>
         ))}
