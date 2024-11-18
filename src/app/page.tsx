@@ -1,11 +1,11 @@
-import { DocumentTable } from "@/components/document-table";
+import { Documents } from "@/components/Documents";
 import { Header } from "@/components/header";
 
 export default function Home() {
   return (
     <>
     <Header/>
-    <DocumentTable/>
+    <Documents/>
     </>
   );
 }

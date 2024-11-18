@@ -1,27 +1,29 @@
 'use client'
 
-import { Bell, Menu, Grid2X2 } from 'lucide-react'
-import { Button } from "@/components/ui/button"
+import { Bell, Menu, Grid2X2 } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
+import { useSidebar } from "@/context/sidebar-context";
 
 export function Header() {
+  const { toggleSidebar } = useSidebar();
+
   return (
     <header className="border-b">
       <div className="flex h-16 items-center px-4">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={toggleSidebar}>
             <Menu className="h-5 w-5" />
           </Button>
-          
-          <div className="flex items-center gap-2">
 
+          <div className="flex items-center gap-2">
             <span className="text-xl font-medium">e-paper</span>
           </div>
         </div>
@@ -40,7 +42,7 @@ export function Header() {
           </Button>
 
           <DropdownMenu>
-            <DropdownMenuTrigger asChild className='h-12 w-60 p-2 gap-2'>
+            <DropdownMenuTrigger asChild className="h-12 w-60 p-2 gap-2">
               <Button variant="outline">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
@@ -48,7 +50,9 @@ export function Header() {
                 </Avatar>
                 <div className="flex flex-col items-start text-sm font-bold">
                   <span>Nome do usuário</span>
-                  <span className="text-muted-foreground text-xs font-normal">Organização</span>
+                  <span className="text-muted-foreground text-xs font-normal">
+                    Organização
+                  </span>
                 </div>
                 <svg
                   width="15"
@@ -74,5 +78,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
