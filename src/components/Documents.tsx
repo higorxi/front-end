@@ -7,6 +7,7 @@ import DocumentTableRow from "./document/DocumentTableRow";
 import Pagination from "./document/Pagination";
 import SearchAndFilter from "./document/SearchAndFilter";
 import DocumentCreator from "./document/DocumentCreator";
+import Footer from "./Footer";
 
 export function Documents() {
   const documents = [
@@ -22,39 +23,45 @@ export function Documents() {
   ];
 
   return (
-    <div className="flex h-screen">
+    <div className="flex">
       <Sidebar />
 
-      <div className="flex-1 w-full  mx-12 p-4 space-y-4">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">Documentos</h1>
-            <p className="text-muted-foreground">
-              Crie, gerencie e visualize os documentos
-            </p>
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1 mx-12 p-4 space-y-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight">Documentos</h1>
+              <p className="text-muted-foreground">
+                Crie, gerencie e visualize os documentos
+              </p>
+            </div>
+            <SearchAndFilter />
           </div>
-          <SearchAndFilter />
+
+          <Separator />
+
+          <div className="flex items-center justify-between">
+            <DocumentSelectors />
+            <DocumentCreator />
+          </div>
+
+          <div className="border rounded-lg overflow-x-auto">
+            <Table>
+              <DocumentTableHeader />
+              <TableBody>
+                {documents.map((document) => (
+                  <DocumentTableRow key={document.id} document={document} />
+                ))}
+              </TableBody>
+            </Table>
+            <Pagination />
+          </div>
         </div>
 
-        <Separator />
-
-        <div className="flex items-center justify-between">
-          <DocumentSelectors />
-          <DocumentCreator/>
-        </div>
-
-        <div className="border rounded-lg overflow-x-auto">
-          <Table>
-            <DocumentTableHeader />
-            <TableBody>
-              {documents.map((document) => (
-                <DocumentTableRow key={document.id} document={document} />
-              ))}
-            </TableBody>
-          </Table>
-          <Pagination />
-        </div>
+        <Footer />
       </div>
     </div>
   );
 }
+
+
