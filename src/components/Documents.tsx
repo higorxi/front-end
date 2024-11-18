@@ -4,10 +4,10 @@ import { Separator } from "@/components/ui/separator";
 import DocumentSelectors from "./document/DocumentSelectors";
 import DocumentTableHeader from "./document/DocumentTableHeader";
 import DocumentTableRow from "./document/DocumentTableRow";
-import Pagination from "./document/Pagination";
 import SearchAndFilter from "./document/SearchAndFilter";
 import DocumentCreator from "./document/DocumentCreator";
 import Footer from "./Footer";
+import { DocumentTableFooter } from "./document/DocumentTableFooter";
 
 export function Documents() {
   const documents = [
@@ -54,14 +54,23 @@ export function Documents() {
                 ))}
               </TableBody>
             </Table>
-            <Pagination />
+            <DocumentTableFooter />
+          </div>
+
+          <div className="flex justify-end items-center mt-4">
+          <span className="mr-4 text-sm text-gray-500">09 de 100</span>
+            <div className="flex space-x-2">
+              <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+                Anterior
+              </button>
+              <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+                Próximo
+              </button>
+            </div>
           </div>
         </div>
-
         <Footer />
       </div>
     </div>
   );
 }
-
-
