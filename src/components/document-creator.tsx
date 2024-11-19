@@ -8,7 +8,13 @@ import {
 } from "lucide-react";
 import PreviewModal from "./preview-modal";
 
-const DocumentCreationModal = ({ isOpen, onClose }) => {
+
+interface DocumentCreationModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps) => {
   const [step, setStep] = useState(1);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileName, setFileName] = useState("");
