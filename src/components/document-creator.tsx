@@ -16,7 +16,7 @@ interface DocumentCreationModalProps {
 
 const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps) => {
   const [step, setStep] = useState(1);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<any>(null);
   const [fileName, setFileName] = useState("");
   const [zoom, setZoom] = useState(100);
   const [origem, setOrigem] = useState("");
@@ -30,7 +30,7 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
   if (!isOpen) return null;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleFileSelect = (event: { target: { files: any[]; }; }) => {
+  const handleFileSelect = (event: any) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file);
@@ -39,7 +39,7 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
     }
   };
 
-  const handleDrop = (event: { preventDefault: () => void; dataTransfer: { files: any[]; }; }) => {
+  const handleDrop = (event: any) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (file) {
