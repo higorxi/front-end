@@ -20,6 +20,15 @@ export function Documents() {
       createdAt: "12 de abril 2024",
       updatedAt: "12 de abril 2024",
     },
+    {
+      id: "0001",
+      name: "Nome do documento",
+      sender: "Courtney Henry",
+      totalValue: "R$200,00",
+      netValue: "R$200,00",
+      createdAt: "12 de abril 2024",
+      updatedAt: "12 de abril 2024",
+    },
   ];
 
   return (

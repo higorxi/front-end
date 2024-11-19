@@ -2,7 +2,7 @@ import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuConten
 import { Button } from "@/components/ui/button";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { TableRow, TableCell } from "@/components/ui/table";
-import { Eye, Trash, FileText } from "lucide-react";
+import { Trash, FileText, View } from "lucide-react";
 import { Document } from "@/types/interface/Document";
 
 const DocumentTableRow = ({ document }: { document: Document }) => {
@@ -34,7 +34,7 @@ const DocumentTableRow = ({ document }: { document: Document }) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem className="flex items-center gap-2">
-              <Eye className="h-4 w-4" /> Visualizar
+              <View className="h-4 w-4" /> Visualizar
             </DropdownMenuItem>
             <DropdownMenuItem className="flex items-center gap-2">
               <Trash className="h-4 w-4" /> Excluir documento
