@@ -2,9 +2,10 @@ import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuConten
 import { Button } from "@/components/ui/button";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { TableRow, TableCell } from "@/components/ui/table";
-import { FileIcon, Eye, Trash } from "lucide-react";
+import { Eye, Trash, FileText } from "lucide-react";
+import { Document } from "@/types/interface/Document";
 
-const DocumentTableRow = ({ document }: { document: any }) => {
+const DocumentTableRow = ({ document }: { document: Document }) => {
   return (
     <TableRow>
       <TableCell>
@@ -12,9 +13,11 @@ const DocumentTableRow = ({ document }: { document: any }) => {
       </TableCell>
       <TableCell>
         <div className="flex items-center gap-2">
-          <FileIcon className="h-4 w-4 text-muted-foreground" />
-          <span className="font-medium">Cód. {document.id}</span>
-          <span className="text-muted-foreground">{document.name}</span>
+          <FileText className="h-6 w-6 text-muted-foreground" />
+          <div className="flex flex-col">
+            <span className="font-medium">Cód. {document.id}</span>
+            <span className="text-muted-foreground ">{document.name}</span>
+          </div>
         </div>
       </TableCell>
       <TableCell>{document.sender}</TableCell>
