@@ -5,7 +5,17 @@ import { TableRow, TableCell } from "@/components/ui/table";
 import { Trash, FileText, View } from "lucide-react";
 import { Document } from "@/types/interface/Document";
 
-const DocumentTableRow = ({ document }: { document: Document }) => {
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+  return date.toLocaleDateString('pt-BR', options);
+};
+
+interface DocumentTableRowProps {
+  document: Document;
+}
+
+const DocumentTableRow = ({ document }: DocumentTableRowProps): JSX.Element => {
   return (
     <TableRow>
       <TableCell>
@@ -23,8 +33,8 @@ const DocumentTableRow = ({ document }: { document: Document }) => {
       <TableCell>{document.sender}</TableCell>
       <TableCell>{document.totalValue}</TableCell>
       <TableCell>{document.netValue}</TableCell>
-      <TableCell>{document.createdAt}</TableCell>
-      <TableCell>{document.updatedAt}</TableCell>
+      <TableCell>{formatDate(document.createdAt)}</TableCell> 
+      <TableCell>{formatDate(document.updatedAt)}</TableCell>
       <TableCell>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

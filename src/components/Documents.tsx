@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { useState, useEffect } from "react";
 import Sidebar from "./sidebar";
 import { Table, TableBody } from "@/components/ui/table";
@@ -11,12 +12,51 @@ import DocumentCreator from "./document/DocumentCreator";
 import Footer from "./Footer";
 import { DocumentTableFooter } from "./document/DocumentTableFooter";
 import { getAllDocuments } from "@/service/DocumentService";
-import { Document } from "@/types/interface/Document";
+import { Document, DocumentSend } from "@/types/interface/Document";
+
+function calculateFooterData(documents: DocumentSend[]) {
+  if (!documents || documents.length === 0) {
+    return {
+      totalDocuments: 0,
+      uniqueEmitentes: 0,
+      totalTributos: 0,
+      totalValorLiquido: 0,
+    };
+  }
+
+  const totalDocuments = documents.length;
+
+  const emitentes = new Set(documents.map((doc) => doc.sender));
+  const uniqueEmitentes = emitentes.size;
+
+  const totalTributos = documents.reduce((sum, doc) => {
+    const total = parseFloat(doc.totalValue.replace(/[^\d,-]/g, '').replace(',', '.'));
+    return sum + total;
+  }, 0);
+
+  const totalValorLiquido = documents.reduce((sum, doc) => {
+    const net = parseFloat(doc.netValue.replace(/[^\d,-]/g, '').replace(',', '.'));
+    return sum + net;
+  }, 0);
+
+  return {
+    totalDocuments,
+    uniqueEmitentes,
+    totalTributos,
+    totalValorLiquido,
+  };
+}
 
 export function Documents() {
   const [documents, setDocuments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [footerData, setFooterData] = useState({
+    totalDocuments: 0,
+    uniqueEmitentes: 0,
+    totalTributos: 0,
+    totalValorLiquido: 0,
+  });
 
   const fetchDocuments = async (page = 1) => {
     try {
@@ -25,7 +65,7 @@ export function Documents() {
       if (!response) {
         throw new Error(`Erro na API: ${response.status} ${response.statusText}`);
       }
-  
+
       setDocuments(response.data);
       setTotalPages(response.totalPages);
       setCurrentPage(response.currentPage);
@@ -37,6 +77,10 @@ export function Documents() {
   useEffect(() => {
     fetchDocuments(currentPage);
   }, [currentPage]);
+
+  useEffect(() => {
+    setFooterData(calculateFooterData(documents));
+  }, [documents]);
 
   return (
     <div className="flex">
@@ -70,7 +114,7 @@ export function Documents() {
                 ))}
               </TableBody>
             </Table>
-            <DocumentTableFooter />
+            <DocumentTableFooter data={footerData} />
           </div>
 
           <div className="flex justify-end items-center mt-4">
