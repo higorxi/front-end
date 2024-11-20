@@ -1,0 +1,25 @@
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://admin:admin@localhost:5432/meudb"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum DocumentType {
+  NF_SERVICE
+  NF_ELECTRONIC
+  RECEIPT
+}
+
+model Document {
+  id         String       @id @default(cuid())
+  name       String
+  sender     String
+  totalValue String
+  netValue   String
+  type       DocumentType
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+}
