@@ -1,11 +1,11 @@
-import { Document } from "@/types/interface/Document";
+import { DocumentSend } from "@/types/interface/Document";
 import { del, get, post } from "./apiService";
 
 export const getDocumentById = async (id: string) => {
   return await get(`/api/documents/${id}`);
 };
 
-export const createDocument = async (data: Document) => {
+export const createDocument = async (data: DocumentSend) => {
     return await post(`/api/documents/create`, data);
 };
 
