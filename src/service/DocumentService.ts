@@ -12,5 +12,9 @@ export const createDocument = async (data: DocumentSend) => {
 export const deleteDocumentById = async (id: string) => {
     return await del(`/api/documents/${id}`);
 };
+
+export const getAllDocuments = async (page?: number) => {
+  return await get(`/api/documents/getAll?page=${page}&limit=7`)
+}
   
 

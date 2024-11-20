@@ -1,3 +1,5 @@
+"use client"
+import { useState, useEffect } from "react";
 import Sidebar from "./sidebar";
 import { Table, TableBody } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
@@ -8,28 +10,33 @@ import SearchAndFilter from "./document/SearchAndFilter";
 import DocumentCreator from "./document/DocumentCreator";
 import Footer from "./Footer";
 import { DocumentTableFooter } from "./document/DocumentTableFooter";
+import { getAllDocuments } from "@/service/DocumentService";
+import { Document } from "@/types/interface/Document";
 
 export function Documents() {
-  const documents = [
-    {
-      id: "0000",
-      name: "Nome do documento",
-      sender: "Courtney Henry",
-      totalValue: "R$200,00",
-      netValue: "R$200,00",
-      createdAt: "12 de abril 2024",
-      updatedAt: "12 de abril 2024",
-    },
-    {
-      id: "0001",
-      name: "Nome do documento",
-      sender: "Courtney Henry",
-      totalValue: "R$200,00",
-      netValue: "R$200,00",
-      createdAt: "12 de abril 2024",
-      updatedAt: "12 de abril 2024",
-    },
-  ];
+  const [documents, setDocuments] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchDocuments = async (page = 1) => {
+    try {
+      const response = await getAllDocuments(page);
+
+      if (!response) {
+        throw new Error(`Erro na API: ${response.status} ${response.statusText}`);
+      }
+  
+      setDocuments(response.data);
+      setTotalPages(response.totalPages);
+      setCurrentPage(response.currentPage);
+    } catch (error) {
+      console.error("Erro ao buscar documentos:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDocuments(currentPage);
+  }, [currentPage]);
 
   return (
     <div className="flex">
@@ -58,7 +65,7 @@ export function Documents() {
             <Table>
               <DocumentTableHeader />
               <TableBody>
-                {documents.map((document) => (
+                {documents.map((document: Document) => (
                   <DocumentTableRow key={document.id} document={document} />
                 ))}
               </TableBody>
@@ -67,12 +74,22 @@ export function Documents() {
           </div>
 
           <div className="flex justify-end items-center mt-4">
-          <span className="mr-4 text-sm text-gray-500">09 de 100</span>
+            <span className="mr-4 text-sm text-gray-500">
+              Página {currentPage} de {totalPages}
+            </span>
             <div className="flex space-x-2">
-              <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+              <button
+                className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              >
                 Anterior
               </button>
-              <button className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+              <button
+                className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              >
                 Próximo
               </button>
             </div>
