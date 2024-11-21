@@ -1,9 +1,12 @@
+"use client"
 import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { TableRow, TableCell } from "@/components/ui/table";
 import { Trash, FileText, View } from "lucide-react";
 import { Document } from "@/types/interface/Document";
+import { useState } from "react";
+import DeleteModal from "../delete-modal";
 
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
@@ -16,7 +19,13 @@ interface DocumentTableRowProps {
 }
 
 const DocumentTableRow = ({ document }: DocumentTableRowProps): JSX.Element => {
+  const [modalDeleteOpen, setModalDeleteOpen] = useState(false)
+  const openModalDeleteDoc = () => {
+    setModalDeleteOpen(true)
+  }
   return (
+   <>
+   
     <TableRow>
       <TableCell>
         <input type="checkbox" className="form-checkbox" />
@@ -46,13 +55,15 @@ const DocumentTableRow = ({ document }: DocumentTableRowProps): JSX.Element => {
             <DropdownMenuItem className="flex items-center gap-2">
               <View className="h-4 w-4" /> Visualizar
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-2">
+            <DropdownMenuItem className="flex items-center gap-2" onClick={openModalDeleteDoc}>
               <Trash className="h-4 w-4" /> Excluir documento
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </TableCell>
     </TableRow>
+    {modalDeleteOpen && <DeleteModal idDoc={document.id} isOpen={modalDeleteOpen} onClose={() => setModalDeleteOpen(false)}/>}
+    </> 
   );
 };
 
