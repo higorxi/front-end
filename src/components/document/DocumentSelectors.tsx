@@ -6,11 +6,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import InfoIcon from "../ui/info-icon";
+import { isMobile } from 'react-device-detect';
 
 const DocumentSelectors = () => {
   return (
-    <div className="flex items-center gap-8">
-      <div className="flex flex-col text-start">
+    <div className={`flex ${isMobile ? 'flex-col gap-4 w-full' : 'gap-8'}`}>
+      <div className="flex flex-col text-start w-full sm:w-full md:w-[180px]">
         <label
           htmlFor="origem-do-documento"
           className="font-bold text-[14px] text-gray-600 mb-2 flex items-center gap-2"
@@ -22,7 +23,7 @@ const DocumentSelectors = () => {
           />
         </label>
         <Select defaultValue="digitalizado">
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full sm:w-[180px]">
             <SelectValue placeholder="Selecione" />
           </SelectTrigger>
           <SelectContent>
@@ -33,20 +34,19 @@ const DocumentSelectors = () => {
         </Select>
       </div>
 
-      <div className="flex flex-col text-start">
+      <div className="flex flex-col text-start w-full sm:w-full md:w-[180px]">
         <label
           htmlFor="tipo-documental"
           className="font-bold text-[14px] text-gray-600 mb-2 flex items-center gap-2"
         >
           Tipo documental
           <InfoIcon
-            message="Escolha o tipo do documento a fifm de filtrar."
+            message="Escolha o tipo do documento a fim de filtrar."
             title="Tipo Documental"
-
           />
         </label>
         <Select defaultValue="nota-fiscal">
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full sm:w-[180px]">
             <SelectValue placeholder="Selecione" />
           </SelectTrigger>
           <SelectContent>

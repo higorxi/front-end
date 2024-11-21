@@ -9,6 +9,7 @@ export default function Sidebar() {
   const { isExpanded } = useSidebar();
   const [activeItem, setActiveItem] = useState<number | null>(null);
 
+
   const navItems = [
     { id: 1, label: "Soluções", icon: LayoutGrid, href: "#" },
     { id: 2, label: "Documentos", icon: FileText, href: "#" },

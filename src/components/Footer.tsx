@@ -10,7 +10,7 @@ const Footer = () => {
           alt="Logo"
           width={32}
           height={32}
-          className="filter grayscale" 
+          className="filter grayscale"
         />
         <p className="text-sm text-gray-600">
           Copyright © 2024 e-paper

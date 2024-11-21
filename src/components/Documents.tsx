@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import { DocumentTableFooter } from "./document/DocumentTableFooter";
 import { getAllDocuments } from "@/service/DocumentService";
 import { Document, DocumentSend } from "@/types/interface/Document";
+import { isMobile } from 'react-device-detect';
 
 function calculateFooterData(documents: DocumentSend[]) {
   if (!documents || documents.length === 0) {
@@ -87,8 +88,8 @@ export function Documents() {
       <Sidebar />
 
       <div className="flex-1 flex flex-col">
-        <div className="flex-1 mx-12 p-4 space-y-4">
-          <div className="flex justify-between items-center">
+        <div className={`${isMobile ? "flex-1 mx-6 p- space-y-4" : "flex-1 mx-12 p-4 space-y-4"}`}>
+          <div className={`flex ${isMobile ? "flex-col gap-4" : "justify-between items-center"}`}>
             <div>
               <h1 className="text-2xl font-bold tracking-tight">Documentos</h1>
               <p className="text-muted-foreground">
@@ -105,16 +106,21 @@ export function Documents() {
             <DocumentCreator />
           </div>
 
-          <div className="border rounded-lg overflow-x-auto">
-            <Table>
-              <DocumentTableHeader />
-              <TableBody>
-                {documents.map((document: Document) => (
-                  <DocumentTableRow key={document.id} document={document} />
-                ))}
-              </TableBody>
-            </Table>
-            <DocumentTableFooter data={footerData} />
+          <div className="border rounded-lg overflow-hidden">
+            <div
+              className={`relative ${isMobile ? "max-w-[290px] max-h-[500px] overflow-x-auto" : "w-full"}`}
+            >
+              <Table>
+                <DocumentTableHeader />
+                <TableBody>
+                  {documents.map((document: Document) => (
+                    <DocumentTableRow key={document.id} document={document} />
+                  ))}
+                </TableBody>
+              </Table>
+
+              {!isMobile && <DocumentTableFooter data={footerData} />}
+            </div>
           </div>
 
           <div className="flex justify-end items-center mt-4">
@@ -139,6 +145,7 @@ export function Documents() {
             </div>
           </div>
         </div>
+
         <Footer />
       </div>
     </div>

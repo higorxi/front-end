@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { Bell, Menu, LayoutGrid } from 'lucide-react';
+import { Bell, Menu, LayoutGrid } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,8 +11,9 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { useSidebar } from "@/context/sidebar-context";
-import Image from 'next/image';
-import Logo from '../../public/logo/logo.png'
+import Image from "next/image";
+import Logo from "../../public/logo/logo.png";
+import { isMobile } from "react-device-detect";
 
 export function Header() {
   const { toggleSidebar } = useSidebar();
@@ -26,13 +27,10 @@ export function Header() {
           </Button>
 
           <div className="flex items-center gap-2">
-            <Image
-            src={Logo}
-            alt="Logo"
-            width={32}
-            height={32}
-              />
-            <span className="text-xl font-medium">e-paper</span>
+            <Image src={Logo} alt="Logo" width={32} height={32} />
+            <p className={`${isMobile ? "text-lg" : "text-xl font-medium"}`}>
+              e-paper
+            </p>
           </div>
         </div>
 
@@ -40,28 +38,37 @@ export function Header() {
 
         <Button variant="ghost" className="gap-2">
           <LayoutGrid className="h-4 w-4" />
-          Soluções
+          {!isMobile && <p>Soluções</p>}
         </Button>
 
         <div className="ml-auto flex items-center gap-4">
-          <Button variant="ghost" size="icon">
-            <Bell className="h-5 w-5" />
-            <span className="sr-only">Notifications</span>
-          </Button>
+          {!isMobile && (
+            <Button variant="ghost" size="icon">
+              <Bell className="h-5 w-5" />
+              <span className="sr-only">Notifications</span>
+            </Button>
+          )}
 
           <DropdownMenu>
-            <DropdownMenuTrigger asChild className="h-12 w-60 p-2 gap-2">
+            <DropdownMenuTrigger
+              asChild
+              className={`${
+                isMobile ? "h-12 w-32 p-2 gap-2" : "h-12 w-60p-2 gap-2"
+              }`}
+            >
               <Button variant="outline">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="https://github.com/shadcn.png" alt="User" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
-                <div className="flex flex-col items-start text-sm font-bold">
-                  <span>Nome do usuário</span>
-                  <span className="text-muted-foreground text-xs font-normal">
-                    Organização
-                  </span>
-                </div>
+                {!isMobile && (
+                  <div className="flex flex-col items-start text-sm font-bold">
+                    <span>Nome do usuário</span>
+                    <span className="text-muted-foreground text-xs font-normal">
+                      Organização
+                    </span>
+                  </div>
+                )}
                 <svg
                   width="15"
                   height="15"
