@@ -1,29 +1,61 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useRef } from "react";
-import {
-  X,
-  Upload,
-  FileText,
-} from "lucide-react";
+import { X, Upload, FileText } from "lucide-react";
 import PreviewModal from "./preview-modal";
 import CodeInput from "./ui/code-input";
-
+import { createDocument } from "@/service/DocumentService";
+import InfoIcon from "./ui/info-icon";
 
 interface DocumentCreationModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps) => {
+const DocumentCreationModal = ({
+  isOpen,
+  onClose,
+}: DocumentCreationModalProps) => {
   const [step, setStep] = useState(1);
   const [selectedFile, setSelectedFile] = useState<any>(null);
-  const [fileName, setFileName] = useState("");
+  const [loading, setLoading] = useState(false);
   const [zoom, setZoom] = useState(100);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState("");
+
   const [origem, setOrigem] = useState("");
   const [tipo, setTipo] = useState("");
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState('');
+  const [code, setCode] = useState<string>("");
+  const [fileName, setFileName] = useState("");
+  const sender = "Empresa RLV";
+  const totalValue = "12500.00";
+  const netValue = "234";
+
+  const createDoc = async () => {
+    try {
+      setLoading(true);
+      const dataSend = {
+        sender,
+        totalValue,
+        netValue,
+        name: fileName,
+        id: code,
+        type: tipo,
+      };
+      const response = await createDocument(dataSend);
+      if (response) {
+        onClose();
+      }
+    } catch (error) {
+      console.error("Error ao criar documento", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCodeChange = (newCode: string) => {
+    setCode(newCode);
+  };
 
   const maxFileSize = 10 * 1024 * 1024; // 10MB
   const fileInputRef = useRef(null);
@@ -58,7 +90,7 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
     }
   };
 
-  const handleDragOver = (event: { preventDefault: () => void; }) => {
+  const handleDragOver = (event: { preventDefault: () => void }) => {
     event.preventDefault();
   };
 
@@ -112,7 +144,6 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
     );
   };
 
-
   const renderStep1 = () => (
     <div className="bg-white rounded-lg w-full max-w-xl p-6 relative z-40">
       <div className="flex justify-between items-center mb-4">
@@ -124,11 +155,15 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
 
       <p className="text-sm text-gray-600 mb-4">
         Insira os dados necessários para criar
+        <InfoIcon
+          message="Caso nenhum código seja informado, um código aleatório será gerado"
+          title="Código"
+        />
       </p>
 
       <div className="space-y-4">
         <div>
-          <CodeInput/>
+          <CodeInput onCodeChange={handleCodeChange} />
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Origem do documento
           </label>
@@ -180,7 +215,7 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
                   onChange={handleFileSelect}
                   accept=".pdf,.doc,.docx"
                 />
-                <span className="text-sm text-gray-700 underline">
+                <span className="text-sm text-[#191E29] border border-gray-300 bg-white px-4 py-2 rounded-md" >
                   Procurar e selecionar arquivo
                 </span>
               </label>
@@ -198,7 +233,10 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
           >
             Cancelar
           </button>
-          <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+          <button
+            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+            onClick={() => setStep(2)}
+          >
             Criar documento
           </button>
         </div>
@@ -229,16 +267,6 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
           />
         </div>
 
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Observações
-          </label>
-          <textarea
-            className="w-full border rounded-md p-2 h-24"
-            placeholder="Digite suas observações"
-          />
-        </div>
-
         <FileUploadInfo />
 
         <div className="flex justify-between mt-6 pt-4 border-t">
@@ -250,8 +278,8 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
           </button>
 
           <button
-            onClick={() => alert("Documento criado!")}
-            disabled={!fileName}
+            onClick={createDoc}
+            disabled={!fileName || loading}
             className={`px-4 py-2 bg-green-500 text-white rounded-md ${
               fileName ? "hover:bg-green-600" : "opacity-50 cursor-not-allowed"
             }`}

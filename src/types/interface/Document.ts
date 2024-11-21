@@ -14,4 +14,13 @@ export interface Document {
     totalValue: string;
     netValue: string;
   }
+
+  export interface createDoc {
+    sender: string
+    totalValue: string,
+    netValue: string,
+    name: string,
+    id: string,
+    type: string,
+  }
   

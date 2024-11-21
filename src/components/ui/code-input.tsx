@@ -2,15 +2,19 @@ import { useState } from "react";
 
 type CodeInputProps = {
   maxDigits?: number;
+  onCodeChange?: (code: string) => void;
 };
 
-const CodeInput: React.FC<CodeInputProps> = ({ maxDigits = 4 }) => {
+const CodeInput: React.FC<CodeInputProps> = ({ maxDigits = 4, onCodeChange }) => {
   const [code, setCode] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, ""); 
+    const value = e.target.value.replace(/\D/g, "");
     if (value.length <= maxDigits) {
       setCode(value);
+      if (onCodeChange) {
+        onCodeChange(value);
+      }
     }
   };
 
@@ -35,7 +39,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     width: "6rem",
-    marginBottom: '1rem'
+    marginBottom: "1rem",
   },
   input: {
     fontSize: "1.5rem",
