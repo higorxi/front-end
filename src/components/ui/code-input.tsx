@@ -1,4 +1,3 @@
-// components/CodeInput.tsx
 import { useState } from "react";
 
 type CodeInputProps = {
@@ -35,16 +34,17 @@ const styles = {
     flexDirection: "column" as const,
     alignItems: "center",
     justifyContent: "center",
-    padding: "1rem",
-    width: "150px",
+    width: "6rem",
+    marginBottom: '1rem'
   },
   input: {
     fontSize: "1.5rem",
     textAlign: "center" as const,
-    borderRadius: "5px",
-    border: "1px solid #ccc",
+    borderRadius: "15px",
+    border: "1px solid var(--Tokens-Border-border-muted, #E5E7EB)",
     outline: "none",
     width: "100%",
+    backgroundColor: "var(--Tokens-Background-bg-surface, #F3F4F6)",
   },
   counter: {
     marginTop: "10px",
