@@ -15,7 +15,7 @@ enum DocumentType {
 }
 
 model Document {
-  id         String       @id @default(cuid())
+  id         String       @id @unique
   name       String
   sender     String
   totalValue String
