@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
@@ -15,25 +15,28 @@ const SearchAndFilter = () => {
   };
 
   return (
-    <div className="relative">
-      <div className="flex items-center gap-2">
-        <div className="relative">
-          <MagnifyingGlassIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input type="search" placeholder="Buscar documentos" className="pl-8" />
+    <div className="relative ">
+      <div className="flex items-center gap-4 ">
+        <div className="relative flex-1">
+          <Input
+            type="search"
+            placeholder="Buscar documentos"
+            className="pr-10 pl-4 text-lg py-3"
+          />
+          <MagnifyingGlassIcon className="absolute right-2.5 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         </div>
-        <Button variant="outline" onClick={toggleFilterPanel}>
-          <FilterIcon className="mr-2 h-4 w-4" />
+        
+        <Button variant="outline" onClick={toggleFilterPanel} className="py-3 px-4">
+          <FilterIcon className="mr-2 h-5 w-5" />
           Filtrar
         </Button>
       </div>
 
       {isFilterOpen && (
-         <DocumentFilter open={isFilterOpen} onOpenChange={setIsFilterOpen} />
+        <DocumentFilter open={isFilterOpen} onOpenChange={setIsFilterOpen} />
       )}
     </div>
   );
 };
 
 export default SearchAndFilter;
-
-

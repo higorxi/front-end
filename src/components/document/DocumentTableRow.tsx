@@ -23,7 +23,7 @@ const DocumentTableRow = ({ document }: DocumentTableRowProps): JSX.Element => {
       </TableCell>
       <TableCell>
         <div className="flex items-center gap-2">
-          <FileText className="h-6 w-6 text-muted-foreground" />
+          <FileText className="h-6 w-6 text-muted-foreground" color="#05C151"/>
           <div className="flex flex-col">
             <span className="font-medium">Cód. {document.id}</span>
             <span className="text-muted-foreground ">{document.name}</span>
