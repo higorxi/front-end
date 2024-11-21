@@ -9,8 +9,8 @@ export function DocumentTableFooter({ data }: { data: any }) {
 
   return (
     <Table className="w-full">
-      <TableFooter className="bg-gray-100">
-        <TableRow className="flex justify-between mx-8">
+      <TableFooter className="bg-gray-100 mr-12">
+        <TableRow className="flex justify-between mx-12">
           <TableCell className="w-1/6">
             <span className="size-3">Total</span>
             <div className="flex flex-col items-start">
@@ -19,7 +19,7 @@ export function DocumentTableFooter({ data }: { data: any }) {
               </span>
             </div>
           </TableCell>
-          <TableCell className="w-1/6">
+          <TableCell className="w-1/6 ml-28">
             <span className="size-3">n de emitentes</span>
             <div className="flex flex-col items-start">
               <span className="font-normal size-3.5">
