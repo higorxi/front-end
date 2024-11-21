@@ -7,6 +7,7 @@ import {
   FileText,
 } from "lucide-react";
 import PreviewModal from "./preview-modal";
+import CodeInput from "./ui/code-input";
 
 
 interface DocumentCreationModalProps {
@@ -127,6 +128,7 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
 
       <div className="space-y-4">
         <div>
+          <CodeInput/>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Origem do documento
           </label>
@@ -151,8 +153,9 @@ const DocumentCreationModal = ({ isOpen, onClose }:  DocumentCreationModalProps)
             onChange={(e) => setTipo(e.target.value)}
           >
             <option value="">Selecionar tipo do documento</option>
-            <option value="contrato">Contrato</option>
-            <option value="nota">Nota Fiscal</option>
+            <option value="NF_SERVICE">Nota fiscal de serviço</option>
+            <option value="NF_ELECTRONIC">Nota fiscal eletrônica</option>
+            <option value="RECEIPT">Recibo</option>
           </select>
         </div>
 

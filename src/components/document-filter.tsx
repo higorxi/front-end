@@ -98,9 +98,9 @@ export function DocumentFilter({ open, onOpenChange }: DocumentFilterProps) {
                 <SelectValue placeholder="Nota fiscal de serviço" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="nfs">Nota fiscal de serviço</SelectItem>
-                <SelectItem value="nfe">Nota fiscal eletrônica</SelectItem>
-                <SelectItem value="recibo">Recibo</SelectItem>
+                <SelectItem value="NF_SERVICE">Nota fiscal de serviço</SelectItem>
+                <SelectItem value="NF_ELECTRONIC">Nota fiscal eletrônica</SelectItem>
+                <SelectItem value="RECEIPT">Recibo</SelectItem>
               </SelectContent>
             </Select>
           </div>
