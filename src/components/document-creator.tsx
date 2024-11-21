@@ -6,6 +6,7 @@ import PreviewModal from "./preview-modal";
 import CodeInput from "./ui/code-input";
 import { createDocument } from "@/service/DocumentService";
 import InfoIcon from "./ui/info-icon";
+import { toast } from "react-toastify";
 
 interface DocumentCreationModalProps {
   isOpen: boolean;
@@ -44,9 +45,11 @@ const DocumentCreationModal = ({
       };
       const response = await createDocument(dataSend);
       if (response) {
+        toast.success("Documento criado com sucesso!")
         onClose();
       }
     } catch (error) {
+      toast.error("Erro ao criar documento")
       console.error("Error ao criar documento", error);
     } finally {
       setLoading(false);
