@@ -62,14 +62,14 @@ const PreviewModal: React.FC<PreviewModalProps> = ({
 
           <div className="flex-1 overflow-auto bg-gray-100 flex items-center justify-center">
             {selectedFile?.type.includes("pdf") ? (
-              <iframe
-                src={previewUrl}
-                className="w-full h-full"
-                style={{
-                  transform: `scale(${zoom / 100})`,
-                  transformOrigin: "center center",
-                }}
-              />
+             <iframe
+             src={previewUrl}
+             className="w-full h-full min-h-[600px] min-w-[400px]"
+             style={{
+               transform: `scale(${zoom / 100})`,
+               transformOrigin: "center center",
+             }}
+           />
             ) : (
               <div className="text-center p-4">
                 <p className="text-gray-500">
