@@ -1,5 +1,7 @@
 # Projeto Front-End E-paper
 
+![Captura de tela 2024-11-21 020040](https://github.com/user-attachments/assets/8e6a3453-6cc4-4ae3-9141-ea025a581aea)
+
 Este é um projeto Next.js criado para testar conhecimento e validar conhecimento utilizando ferramentas como Nextjs, Typescript, Prisma, Vercel e outras.
 
 ## Requisitos
