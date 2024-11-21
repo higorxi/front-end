@@ -35,6 +35,8 @@ npm install
 Para rodar localmente é necessário ter o Docker, pois iremos subir um container de Postgress para o nosso banco.
 Em produção estou utilizando Supabase para nos servir:
 
+Iniciar os serviços com Docker Compose:
+
 ```bash
 docker compose up -d
 ```
@@ -43,7 +45,20 @@ Após rodar o container, temos que definir a nova variável de ambiente, para is
 
 NEXT_PUBLIC_API_URL='http://localhost:3000'
 
-DATABASE_URL=""
+DATABASE_URL="postgresql://prisma_user:prisma_password@localhost:5432/prisma_db"
+
+Gerar o cliente Prisma:
+
+```bash
+npx prisma generate
+```
+
+Sincronizar o banco de dados com o esquema Prisma:
+
+```bash
+npx prisma db push
+```
+
 
 # ATENÇÃO
 CERTIFIQUE-SE SE ESTÁ APONTANDO PARA A PORTA CORRETAMENTE DE SEU FRONT E BACK DA APLICAÇÃO.
