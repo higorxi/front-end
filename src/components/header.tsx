@@ -11,6 +11,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { useSidebar } from "@/context/sidebar-context";
+import Image from 'next/image';
+import Logo from '../../public/logo/logo.png'
 
 export function Header() {
   const { toggleSidebar } = useSidebar();
@@ -24,6 +26,12 @@ export function Header() {
           </Button>
 
           <div className="flex items-center gap-2">
+            <Image
+            src={Logo}
+            alt="Logo"
+            width={32}
+            height={32}
+              />
             <span className="text-xl font-medium">e-paper</span>
           </div>
         </div>
