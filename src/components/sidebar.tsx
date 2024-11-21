@@ -13,7 +13,7 @@ export default function Sidebar() {
   const navItems = [
     { id: 1, label: "Soluções", icon: LayoutGrid, href: "#" },
     { id: 2, label: "Documentos", icon: FileText, href: "#" },
-    { id: 3, label: "Papel T", icon: FileType, href: "#" },
+    { id: 3, label: "Documento", icon: FileType, href: "#" },
     { id: 4, label: "Menu", icon: List, href: "#" },
   ];
 

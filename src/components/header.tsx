@@ -63,9 +63,9 @@ export function Header() {
                 </Avatar>
                 {!isMobile && (
                   <div className="flex flex-col items-start text-sm font-bold">
-                    <span>Nome do usuário</span>
+                    <span>Higor Giovane</span>
                     <span className="text-muted-foreground text-xs font-normal">
-                      Organização
+                      RLV Tecnologia
                     </span>
                   </div>
                 )}
