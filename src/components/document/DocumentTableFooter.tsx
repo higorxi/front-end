@@ -1,11 +1,15 @@
-import { Table, TableFooter, TableRow, TableCell } from "../ui/table";
+import { Table, TableFooter, TableRow, TableCell } from "../ui/table"; 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function DocumentTableFooter({ data }: { data: any }) {
-
   const formatCurrency = (value: number) => {
-    return `R$ ${value.toFixed(2).replace('.', ',')}`;
+    return value
+      .toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+      .replace("R$", "R$ ").replace(",", ".");
   };
+
+  const totalTributosReal = data.totalTributos / 100;
+  const totalValorLiquidoReal = data.totalValorLiquido / 100;
 
   return (
     <Table className="w-full">
@@ -31,7 +35,7 @@ export function DocumentTableFooter({ data }: { data: any }) {
             <span className="size-3">Total de tributos</span>
             <div className="flex flex-col items-start">
               <span className="font-normal size-3.5" style={{ whiteSpace: 'nowrap' }}>
-                {formatCurrency(data.totalTributos)}
+                {formatCurrency(totalTributosReal)}
               </span>
             </div>
           </TableCell>
@@ -39,7 +43,7 @@ export function DocumentTableFooter({ data }: { data: any }) {
             <span className="size-3">Total valor liquido</span>
             <div className="flex flex-col items-start">
               <span className="font-normal size-3.5" style={{ whiteSpace: 'nowrap' }}>
-                {formatCurrency(data.totalValorLiquido)}
+                {formatCurrency(totalValorLiquidoReal)}
               </span>
             </div>
           </TableCell>
