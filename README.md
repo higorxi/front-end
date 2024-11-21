@@ -7,7 +7,7 @@ Este é um projeto Next.js criado para testar conhecimento e validar conheciment
 Antes de rodar o projeto, certifique-se de que você tem as seguintes ferramentas instaladas:
 
 - [Node.js](https://nodejs.org/) (Recomendado: versão LTS)
-- [Docker]([https://nodejs.org/](https://www.docker.com/))
+- [Docker](https://www.docker.com/) - Necessário para utilizarmos o banco de dados de forma facilitada
 - [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/) (Gerenciador de pacotes)
 
 ## Instalação
