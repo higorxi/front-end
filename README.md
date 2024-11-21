@@ -19,5 +19,41 @@ Siga os passos abaixo para rodar o projeto localmente.
 Clone este repositório para sua máquina local:
 
 ```bash
-git clone https://github.com/usuario/repositorio-nextjs.git
-cd repositorio-nextjs
+git clone https://github.com/higorxi/front-end
+cd front-end
+```
+
+### 2. Instalar o projeto
+
+```bash
+npm install
+```
+
+
+### 3. Rodar Localmente
+
+Para rodar localmente é necessário ter o Docker, pois iremos subir um container de Postgress para o nosso banco.
+Em produção estou utilizando Supabase para nos servir:
+
+```bash
+docker compose up -d
+```
+
+Após rodar o container, temos que definir a nova variável de ambiente, para isso deve ser criado um arquivo .env na raiz do projeto e adicionado as seguintes variáveis:
+
+NEXT_PUBLIC_API_URL='http://localhost:3000'
+
+DATABASE_URL=""
+
+# ATENÇÃO
+CERTIFIQUE-SE SE ESTÁ APONTANDO PARA A PORTA CORRETAMENTE DE SEU FRONT E BACK DA APLICAÇÃO.
+# ATENÇÃO
+
+
+### 4. Rodar em modo desenvolvimento
+
+```bash
+npm run dev
+```
+
+
